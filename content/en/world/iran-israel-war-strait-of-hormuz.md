@@ -6,9 +6,10 @@ author: "Rafael Domingo"
 author_bio: "Rafael Domingo is The Point News senior foreign affairs correspondent with 15 years of experience covering the Middle East."
 section: "world"
 hero_image: ""
+hero_video: "/vid.mp4"
 featured: true
 breaking: true
-read_time: 8
+read_time: 2
 location: "Strait of Hormuz / Manila"
 tags: ["iran", "israel", "war", "oil", "geopolitics", "middle-east"]
 ---
