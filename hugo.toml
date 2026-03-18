@@ -1,4 +1,4 @@
-baseURL = "https://thepointnews.com/"
+baseURL = "https://news.pantrypoints.com/"
 title = "The Point News"
 defaultContentLanguage = "en"
 defaultContentLanguageInSubdir = true
@@ -43,9 +43,9 @@ summaryLength = 40
       rtl = false
 
 [params]
-  description     = "Breaking news, in-depth analysis, and the latest updates from the Philippines and the world."
+  description     = "Breaking news, in-depth analysis"
   tagline         = "Get to the point."
-  logo            = "/images/logo.svg"
+  logo            = "/point.png"
   twitterHandle   = "@thepointnews"
   facebookPage    = "thepointnews"
   mainSections    = ["world", "politics", "sports", "technology", "entertainment"]
