@@ -1,0 +1,162 @@
+{{/* ── Navigation ─────────────────────────────────────────────── */}}
+{{ $currentLang := .Lang }}
+{{ $currentSection := .Section }}
+
+<nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 bg-dark-800/95 backdrop-blur-md border-b border-white/8 transition-all duration-300 py-2">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="flex items-center justify-between h-14">
+
+      {{/* ── Logo ── */}}
+      <a href="{{ (site.GetPage "/").RelPermalink | default "/" }}" class="flex items-center gap-2 shrink-0 group">
+        <div class="w-8 h-8 rounded-lg bg-brand flex items-center justify-center text-white font-bold text-sm group-hover:bg-brand-400 transition-colors">
+          TP
+        </div>
+        <div class="leading-tight">
+          <span class="block text-base font-bold text-white tracking-tight">The Point</span>
+          <span class="block text-[10px] text-accent uppercase tracking-widest -mt-0.5">News</span>
+        </div>
+      </a>
+
+      {{/* ── Desktop category links ── */}}
+      <ul class="hidden lg:flex items-center gap-1 mx-4">
+        {{ range .Site.Menus.main }}
+        {{ $active := eq $currentSection (lower .Name) }}
+        <li>
+          <a href="{{ relLangURL (lower .Name) }}"
+             class="nav-link px-3 py-1 rounded {{ if $active }}text-accent{{ end }}">
+            {{ .Name }}
+          </a>
+        </li>
+        {{ end }}
+      </ul>
+
+      {{/* ── Right controls ── */}}
+      <div class="flex items-center gap-2">
+
+        {{/* Search button */}}
+        <button id="search-toggle"
+                class="flex items-center gap-2 bg-dark-600 hover:bg-dark-500 text-gray-300 hover:text-white rounded-full px-3 py-1.5 text-xs transition-all duration-200 group"
+                title="Search (Ctrl+K)">
+          <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+          </svg>
+          <span class="hidden sm:inline">Search</span>
+          <kbd class="hidden md:inline text-[9px] bg-dark-500 group-hover:bg-dark-400 px-1.5 py-0.5 rounded border border-white/10 leading-none">⌘K</kbd>
+        </button>
+
+        {{/* Language switcher */}}
+        <div class="relative">
+          <button id="lang-btn"
+                  class="flex items-center gap-1.5 bg-dark-600 hover:bg-dark-500 text-gray-300 hover:text-white rounded-full px-3 py-1.5 text-xs font-medium uppercase tracking-wider transition-all duration-200">
+            {{ $currentLang }}
+            <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+              <path d="m6 9 6 6 6-6"/>
+            </svg>
+          </button>
+          <div id="lang-dropdown"
+               class="hidden absolute right-0 top-full mt-1 bg-dark-700 border border-white/10 rounded-xl overflow-hidden shadow-xl shadow-black/40 w-36 z-50">
+            {{ range .Site.Languages }}
+            <a href="{{ relLangURL "" | replaceRE (printf "^/%s/" $.Lang) (printf "/%s/" .Lang) }}"
+               class="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-300 hover:text-white hover:bg-dark-600 transition-colors {{ if eq .Lang $currentLang }}text-accent{{ end }}">
+              <span class="uppercase text-[10px] font-bold tracking-widest w-6 text-center {{ if eq .Lang $currentLang }}text-accent{{ else }}text-gray-500{{ end }}">{{ .Lang }}</span>
+              <span>{{ .LanguageName }}</span>
+            </a>
+            {{ end }}
+          </div>
+        </div>
+
+        {{/* Dark mode toggle */}}
+        <button id="theme-toggle"
+                onclick="ThemeManager.toggle()"
+                class="w-8 h-8 flex items-center justify-center rounded-full bg-dark-600 hover:bg-dark-500 text-gray-300 hover:text-accent transition-all duration-200"
+                title="Toggle dark mode">
+          {{/* Sun */}}
+          <svg class="icon-sun w-4 h-4 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+          </svg>
+          {{/* Moon */}}
+          <svg class="icon-moon w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </button>
+
+        {{/* Mobile hamburger */}}
+        <button id="mobile-open" class="lg:hidden w-8 h-8 flex items-center justify-center text-gray-300 hover:text-white">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+{{/* ── Mobile Menu Drawer ────────────────────────────────────────── */}}
+<div id="mobile-overlay" class="fixed inset-0 bg-black/60 z-[60] lg:hidden hidden"></div>
+<aside id="mobile-menu" class="fixed top-0 left-0 h-full w-72 bg-dark-800 z-[70] lg:hidden hidden flex-col">
+  <div class="flex items-center justify-between p-4 border-b border-white/10">
+    <span class="text-lg font-bold text-white">Menu</span>
+    <button id="mobile-close" class="w-8 h-8 flex items-center justify-center text-gray-400 hover:text-white">
+      <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path d="M18 6 6 18M6 6l12 12"/>
+      </svg>
+    </button>
+  </div>
+  <nav class="flex-1 overflow-y-auto p-4">
+    <ul class="space-y-1">
+      {{ range .Site.Menus.main }}
+      <li>
+        <a href="{{ relLangURL (lower .Name) }}"
+           class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-200 hover:text-white hover:bg-dark-600 transition-colors text-sm font-medium {{ if eq $currentSection (lower .Name) }}bg-dark-600 text-accent{{ end }}">
+          {{ .Name }}
+        </a>
+      </li>
+      {{ end }}
+    </ul>
+    <div class="mt-6 pt-6 border-t border-white/10">
+      <p class="text-xs text-gray-500 uppercase tracking-widest mb-3 px-4">Language</p>
+      {{ range .Site.Languages }}
+      <a href="#" class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm {{ if eq .Lang $currentLang }}text-accent font-semibold{{ else }}text-gray-400 hover:text-white hover:bg-dark-600{{ end }} transition-colors">
+        <span class="uppercase text-[10px] font-bold w-6">{{ .Lang }}</span>
+        {{ .LanguageName }}
+      </a>
+      {{ end }}
+    </div>
+  </nav>
+</aside>
+
+{{/* ── Search Modal ──────────────────────────────────────────────── */}}
+<div id="search-modal" class="fixed inset-0 z-[80] hidden flex items-start justify-center pt-20 px-4">
+  <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" id="search-backdrop"></div>
+  <div class="relative w-full max-w-2xl bg-white dark:bg-dark-700 rounded-2xl shadow-2xl shadow-black/50 overflow-hidden">
+    {{/* Search input */}}
+    <div class="flex items-center gap-3 px-4 py-4 border-b border-gray-100 dark:border-white/10">
+      <svg class="w-5 h-5 text-gray-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+      </svg>
+      <input id="search-input"
+             type="text"
+             autocomplete="off"
+             placeholder="{{ i18n "search_placeholder" | default "Search articles, authors…" }}"
+             class="flex-1 bg-transparent text-gray-900 dark:text-white placeholder-gray-400 text-base outline-none">
+      <button id="search-close" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors">
+        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path d="M18 6 6 18M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+    {{/* Results container */}}
+    <div id="search-results" class="max-h-96 overflow-y-auto p-2">
+      <p class="text-sm text-gray-400 p-4 text-center">Type to search…</p>
+    </div>
+    <div class="px-4 py-2.5 bg-gray-50 dark:bg-dark-800 border-t border-gray-100 dark:border-white/10 flex items-center justify-between text-xs text-gray-400">
+      <span>Search by title, author or description</span>
+      <kbd class="bg-white dark:bg-dark-700 border border-gray-200 dark:border-white/15 rounded px-1.5 py-0.5">Esc</kbd>
+    </div>
+  </div>
+</div>
+
+{{/* ── Lightbox ──────────────────────────────────────────────────── */}}
+<div id="lightbox" class="fixed inset-0 z-[90] hidden flex items-center justify-center bg-black/90 cursor-zoom-out p-4">
+  <img id="lightbox-img" src="" alt="" class="max-w-full max-h-full object-contain rounded-lg shadow-2xl">
+</div>

@@ -1,0 +1,62 @@
+{{/* article-card.html
+   Call with: partial "article-card.html" (dict "page" . "size" "large")
+   OR simply:  partial "article-card.html" .   (size defaults to "")
+*/}}
+{{ $p    := .page    | default . }}
+{{ $size := .size    | default "" }}
+
+<article class="card-lift bg-white dark:bg-dark-700 rounded-2xl overflow-hidden group{{ if eq $size "large" }} flex flex-col lg:flex-row{{ else }} flex flex-col{{ end }}">
+
+  {{/* Thumbnail */}}
+  <div class="img-zoom-wrap shrink-0{{ if eq $size "large" }} lg:w-1/2 h-56 lg:h-auto{{ else if eq $size "small" }} h-40{{ else }} h-48{{ end }}">
+    {{ if $p.Params.hero_image }}
+    <img src="{{ $p.Params.hero_image }}" alt="{{ $p.Title }}" class="w-full h-full object-cover">
+    {{ else }}
+    <div class="w-full h-full hero-grad-{{ $p.Section }} flex items-center justify-center">
+      {{ if $p.Params.hero_video }}
+      <svg class="w-12 h-12 text-white/50" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor"/></svg>
+      {{ else }}
+      <span class="text-white/20 font-bold text-5xl uppercase">{{ substr $p.Section 0 1 }}</span>
+      {{ end }}
+    </div>
+    {{ end }}
+  </div>
+
+  {{/* Content */}}
+  <div class="flex flex-col flex-1 p-5{{ if eq $size "large" }} lg:p-7{{ end }}">
+
+    <div class="flex items-center gap-2 mb-3">
+      {{ with $p.Section }}
+      <a href="{{ relURL $p.Section }}" class="badge-{{ $p.Section }} text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full hover:opacity-80 transition-opacity">{{ $p.Section }}</a>
+      {{ end }}
+      {{ if $p.Params.breaking }}
+      <span class="inline-flex items-center gap-1 bg-red-600 text-white text-[10px] font-bold uppercase tracking-widest px-2 py-1 rounded-full">
+        <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>Breaking
+      </span>
+      {{ end }}
+    </div>
+
+    <h2 class="font-bold text-gray-900 dark:text-white group-hover:text-brand dark:group-hover:text-accent transition-colors leading-tight mb-2{{ if eq $size "large" }} text-xl sm:text-2xl line-clamp-3{{ else if eq $size "small" }} text-sm line-clamp-2{{ else }} text-base sm:text-lg line-clamp-2{{ end }}">
+      <a href="{{ $p.RelPermalink }}">{{ $p.Title }}</a>
+    </h2>
+
+    {{ if ne $size "small" }}
+    {{ with $p.Description }}
+    <p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed mb-3 line-clamp-2">{{ . }}</p>
+    {{ end }}
+    {{ end }}
+
+    <div class="flex-1"></div>
+
+    <div class="flex items-center justify-between gap-2 mt-3 pt-3 border-t border-gray-100 dark:border-white/8">
+      <div class="flex items-center gap-2 text-xs text-gray-400 min-w-0">
+        {{ with $p.Params.author }}<span class="font-medium text-gray-600 dark:text-gray-300 truncate">{{ . }}</span><span>·</span>{{ end }}
+        <time datetime="{{ $p.Date.Format "2006-01-02" }}" class="shrink-0">{{ $p.Date.Format "Jan 2" }}</time>
+      </div>
+      <a href="{{ $p.RelPermalink }}" class="shrink-0 text-xs text-brand dark:text-brand-300 font-semibold hover:underline underline-offset-2 flex items-center gap-1">
+        Read<svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
+      </a>
+    </div>
+
+  </div>
+</article>

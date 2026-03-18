@@ -1,0 +1,109 @@
+{{/* article-hero.html — expects context = article page */}}
+{{ $section := .Section }}
+
+<div class="relative h-[65vh] min-h-[450px] overflow-hidden">
+
+  {{/* ── Background priority: video → image → dark-orange gradient ── */}}
+  {{ if .Params.hero_video }}
+  <div class="absolute inset-0" data-grad="hero-grad-{{ $section }}">
+    <video autoplay muted loop playsinline preload="metadata"
+           class="absolute inset-0 w-full h-full object-cover">
+      <source src="{{ .Params.hero_video }}" type="video/mp4">
+    </video>
+  </div>
+  {{ else if .Params.hero_image }}
+  <div class="absolute inset-0 img-zoom-wrap">
+    <img src="{{ .Params.hero_image }}" alt="{{ .Title }}"
+         class="absolute inset-0 w-full h-full object-cover">
+  </div>
+  {{ else }}
+  {{/* Dark orange fallback */}}
+  <div class="absolute inset-0"
+       style="background: linear-gradient(135deg, #7c2d12 0%, #C44D18 40%, #ea580c 70%, #1C2631 100%)">
+  </div>
+  {{ end }}
+
+  {{/* Overlays */}}
+  <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/10"></div>
+  <div class="absolute inset-0 bg-gradient-to-r from-black/50 to-transparent"></div>
+
+  {{/* ── Meta text overlaid ── */}}
+  <div class="absolute inset-0 flex flex-col justify-end">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 w-full pb-8">
+
+      {{/* Category + Breaking badges */}}
+      <div class="flex flex-wrap items-center gap-2 mb-4">
+        {{ with $section }}
+        <a href="{{ relLangURL $section }}"
+           class="badge-{{ $section }} text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full hover:opacity-80 transition-opacity">
+          {{ $section }}
+        </a>
+        {{ end }}
+        {{ if .Params.breaking }}
+        <span class="inline-flex items-center gap-1.5 bg-red-600 text-white text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full">
+          <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+          Breaking
+        </span>
+        {{ end }}
+      </div>
+
+      {{/* Title */}}
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight mb-4 drop-shadow-lg">
+        {{ .Title }}
+      </h1>
+
+      {{/* Description */}}
+      {{ with .Description }}
+      <p class="text-base sm:text-lg text-gray-200 mb-5 max-w-3xl leading-relaxed line-clamp-2">{{ . }}</p>
+      {{ end }}
+
+      {{/* Article meta */}}
+      <div class="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-gray-300">
+        {{ with .Params.author }}
+        <span class="flex items-center gap-1.5 font-medium text-white">
+          <div class="w-6 h-6 rounded-full bg-brand/60 flex items-center justify-center text-xs font-bold">
+            {{ substr . 0 1 }}
+          </div>
+          {{ . }}
+        </span>
+        {{ end }}
+        <span class="flex items-center gap-1.5">
+          <svg class="w-3.5 h-3.5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+          </svg>
+          <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
+        </span>
+        {{ with .Params.read_time }}
+        <span class="flex items-center gap-1.5">
+          <svg class="w-3.5 h-3.5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+          </svg>
+          {{ . }} min read
+        </span>
+        {{ else }}
+        <span class="flex items-center gap-1.5">
+          <svg class="w-3.5 h-3.5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+          </svg>
+          {{ div (len (split .Content " ")) 200 | default 1 }} min read
+        </span>
+        {{ end }}
+        {{ with .Params.location }}
+        <span class="flex items-center gap-1.5">
+          <svg class="w-3.5 h-3.5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+          </svg>
+          {{ . }}
+        </span>
+        {{ end }}
+      </div>
+
+    </div>
+  </div>
+
+  {{/* ── Reading progress bar (absolute top) ── */}}
+  <div class="absolute top-0 left-0 right-0 h-0.5 bg-black/20">
+    <div id="reading-progress" class="h-full bg-accent transition-all duration-100" style="width:0%"></div>
+  </div>
+
+</div>

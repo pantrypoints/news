@@ -1,0 +1,37 @@
+{{/* breaking-news.html — data/breaking_news.json */}}
+{{ $news := site.Data.breaking_news }}
+{{ if $news }}
+<div class="bg-brand text-white">
+  <div class="max-w-7xl mx-auto flex items-stretch">
+    {{/* Label */}}
+    <div class="flex items-center gap-2 bg-accent text-dark-900 px-4 py-2.5 shrink-0 font-bold text-xs uppercase tracking-widest">
+      <span class="inline-block w-2 h-2 rounded-full bg-dark-800 animate-pulse"></span>
+      BREAKING
+    </div>
+    {{/* Ticker */}}
+    <div class="ticker-outer flex-1 overflow-hidden">
+      <div class="ticker-inner whitespace-nowrap inline-flex items-center gap-0 py-2.5">
+        {{ range $news }}
+        <a href="{{ .url | default "#" }}"
+           class="inline-flex items-center gap-3 mr-12 text-sm hover:text-accent transition-colors group">
+          <span class="w-1.5 h-1.5 rounded-full bg-accent/60 shrink-0"></span>
+          <span class="group-hover:underline underline-offset-2">{{ .headline }}</span>
+        </a>
+        {{ end }}
+        {{/* Duplicate for loop */}}
+        {{ range $news }}
+        <a href="{{ .url | default "#" }}"
+           class="inline-flex items-center gap-3 mr-12 text-sm hover:text-accent transition-colors group">
+          <span class="w-1.5 h-1.5 rounded-full bg-accent/60 shrink-0"></span>
+          <span class="group-hover:underline underline-offset-2">{{ .headline }}</span>
+        </a>
+        {{ end }}
+      </div>
+    </div>
+    {{/* Time */}}
+    <div class="flex items-center px-4 text-xs text-orange-200 shrink-0 border-l border-white/20">
+      {{ now.Format "3:04 PM" }}
+    </div>
+  </div>
+</div>
+{{ end }}

@@ -1,0 +1,64 @@
+{{/* sponsors.html — uses data/sponsors.json */}}
+{{ $sponsors := site.Data.sponsors }}
+{{ if $sponsors }}
+<section class="py-8 bg-dark-900 overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 mb-5 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <span class="w-1 h-5 rounded-full bg-accent"></span>
+      <span class="text-xs font-bold uppercase tracking-[0.2em] text-gray-400">Our Sponsors</span>
+    </div>
+    <a href="#" class="text-xs text-gray-500 hover:text-accent transition-colors">Advertise with us →</a>
+  </div>
+
+  {{/* Carousel track */}}
+  <div class="relative overflow-hidden">
+    <div class="sponsors-track flex items-stretch">
+
+      {{/* First set */}}
+      {{ range $sponsors }}
+      {{ $bgColor := .bg_color | default "#1C2631" }}
+      <a href="{{ .url | default "#" }}"
+         class="shrink-0 w-48 h-28 mx-2 rounded-xl overflow-hidden relative group block border border-white/10"
+         style="background-color: {{ $bgColor }};"
+         target="_blank" rel="noopener">
+        {{ if .bg_image }}
+        <img src="{{ .bg_image }}" alt="{{ .name }}"
+             class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+        {{ end }}
+        <div class="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors"></div>
+        <div class="absolute inset-0 flex items-center justify-center p-3">
+          {{ if .logo }}
+          <img src="{{ .logo }}" alt="{{ .name }}" class="max-h-12 max-w-full object-contain filter brightness-0 invert opacity-90 group-hover:opacity-100 transition-opacity">
+          {{ else }}
+          <span class="text-white font-bold text-sm text-center leading-tight opacity-90 group-hover:opacity-100 drop-shadow">{{ .name }}</span>
+          {{ end }}
+        </div>
+      </a>
+      {{ end }}
+
+      {{/* Duplicate for infinite loop */}}
+      {{ range $sponsors }}
+      {{ $bgColor := .bg_color | default "#1C2631" }}
+      <a href="{{ .url | default "#" }}"
+         class="shrink-0 w-48 h-28 mx-2 rounded-xl overflow-hidden relative group block border border-white/10"
+         style="background-color: {{ $bgColor }};"
+         target="_blank" rel="noopener">
+        {{ if .bg_image }}
+        <img src="{{ .bg_image }}" alt="{{ .name }}"
+             class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+        {{ end }}
+        <div class="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors"></div>
+        <div class="absolute inset-0 flex items-center justify-center p-3">
+          {{ if .logo }}
+          <img src="{{ .logo }}" alt="{{ .name }}" class="max-h-12 max-w-full object-contain filter brightness-0 invert opacity-90 group-hover:opacity-100 transition-opacity">
+          {{ else }}
+          <span class="text-white font-bold text-sm text-center leading-tight opacity-90 group-hover:opacity-100 drop-shadow">{{ .name }}</span>
+          {{ end }}
+        </div>
+      </a>
+      {{ end }}
+
+    </div>
+  </div>
+</section>
+{{ end }}

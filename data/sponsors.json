@@ -1,0 +1,72 @@
+[
+  {
+    "name": "Globe Telecom",
+    "url": "https://globe.com.ph",
+    "bg_image": "",
+    "logo": "",
+    "bg_color": "#0066CC"
+  },
+  {
+    "name": "SM Supermalls",
+    "url": "https://smsupermalls.com",
+    "bg_image": "",
+    "logo": "",
+    "bg_color": "#E31837"
+  },
+  {
+    "name": "BDO Unibank",
+    "url": "https://bdo.com.ph",
+    "bg_image": "",
+    "logo": "",
+    "bg_color": "#004C97"
+  },
+  {
+    "name": "Jollibee Foods",
+    "url": "https://jollibee.com.ph",
+    "bg_image": "",
+    "logo": "",
+    "bg_color": "#CC0001"
+  },
+  {
+    "name": "PLDT Home",
+    "url": "https://pldthome.com",
+    "bg_image": "",
+    "logo": "",
+    "bg_color": "#0033A0"
+  },
+  {
+    "name": "Ayala Land",
+    "url": "https://ayalaland.com.ph",
+    "bg_image": "",
+    "logo": "",
+    "bg_color": "#00853F"
+  },
+  {
+    "name": "Meralco",
+    "url": "https://meralco.com.ph",
+    "bg_image": "",
+    "logo": "",
+    "bg_color": "#F7941D"
+  },
+  {
+    "name": "Philippine Airlines",
+    "url": "https://philippineairlines.com",
+    "bg_image": "",
+    "logo": "",
+    "bg_color": "#003DA5"
+  },
+  {
+    "name": "Metrobank",
+    "url": "https://metrobank.com.ph",
+    "bg_image": "",
+    "logo": "",
+    "bg_color": "#C8102E"
+  },
+  {
+    "name": "San Miguel Corp",
+    "url": "https://sanmiguel.com.ph",
+    "bg_image": "",
+    "logo": "",
+    "bg_color": "#003087"
+  }
+]

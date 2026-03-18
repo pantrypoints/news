@@ -1,0 +1,17 @@
+{
+  "name": "the-point-news",
+  "version": "1.0.0",
+  "description": "The Point News — Hugo news site",
+  "scripts": {
+    "predev": "bunx @tailwindcss/cli -i ./assets/css/main.css -o ./static/css/output.css",
+    "dev": "concurrently --kill-others-on-fail --names \"TW,HUGO\" --prefix-colors \"yellow,cyan\" \"bunx @tailwindcss/cli -i ./assets/css/main.css -o ./static/css/output.css --watch\" \"hugo server -D --bind 0.0.0.0\"",
+    "build": "bunx @tailwindcss/cli -i ./assets/css/main.css -o ./static/css/output.css --minify && hugo --minify",
+    "tw:watch": "bunx @tailwindcss/cli -i ./assets/css/main.css -o ./static/css/output.css --watch",
+    "tw:build": "bunx @tailwindcss/cli -i ./assets/css/main.css -o ./static/css/output.css --minify"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.2.1",
+    "tailwindcss": "^4.2.1",
+    "concurrently": "^8.2.2"
+  }
+}

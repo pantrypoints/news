@@ -1,0 +1,65 @@
+{{ define "main" }}
+
+{{ partial "hero-home.html" . }}
+
+<section class="max-w-7xl mx-auto px-4 sm:px-6 py-14">
+  <div class="flex items-center gap-3 mb-8">
+    <span class="w-1 h-7 rounded-full bg-brand"></span>
+    <h2 class="text-xl font-bold text-gray-900 dark:text-white uppercase tracking-wider">Latest Stories</h2>
+  </div>
+
+  {{ $latest := first 7 .Site.RegularPages.ByDate.Reverse }}
+  {{ $hero   := index $latest 0 }}
+  {{ $side   := after 1 (first 5 $latest) }}
+
+  {{ with $hero }}
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+    <div class="lg:col-span-2">
+      {{ partial "article-card.html" (dict "page" . "size" "large") }}
+    </div>
+    <div class="flex flex-col gap-4">
+      {{ range $side }}
+      {{ partial "article-card.html" (dict "page" . "size" "small") }}
+      {{ end }}
+    </div>
+  </div>
+  {{ end }}
+
+  {{ $row2 := after 5 (first 10 .Site.RegularPages.ByDate.Reverse) }}
+  {{ if $row2 }}
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    {{ range $row2 }}
+    {{ partial "article-card.html" (dict "page" .) }}
+    {{ end }}
+  </div>
+  {{ end }}
+</section>
+
+{{ range .Site.Params.mainSections }}
+{{ $section := . }}
+{{ $sec := $.Site.GetPage $section }}
+{{ if and $sec (gt (len $sec.Pages) 0) }}
+<section class="py-12">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="flex items-center justify-between mb-8">
+      <div class="flex items-center gap-3">
+        <span class="w-1 h-7 rounded-full badge-{{ $section }}"></span>
+        <h2 class="text-xl font-bold text-gray-900 dark:text-white uppercase tracking-wider">{{ $sec.Title }}</h2>
+      </div>
+      <a href="{{ $sec.RelPermalink }}" class="text-sm text-brand dark:text-brand-300 font-semibold hover:underline underline-offset-2 flex items-center gap-1">
+        All {{ $sec.Title }}<svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
+      </a>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      {{ range first 4 $sec.Pages.ByDate.Reverse }}
+      {{ partial "article-card.html" (dict "page" .) }}
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}
+{{ end }}
+
+{{ partial "sponsors.html" . }}
+
+{{ end }}

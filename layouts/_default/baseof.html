@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="{{ .Lang }}" class="">
+<head>
+  {{ partial "head.html" . }}
+</head>
+<body class="min-h-screen flex flex-col">
+
+  {{/* Fixed nav */}}
+  {{ partial "nav.html" . }}
+
+  {{/* Page content — nav offset handled per layout */}}
+  <div class="flex-1">
+    {{ block "main" . }}{{ end }}
+  </div>
+
+  {{/* Footer */}}
+  {{ partial "footer.html" . }}
+
+  {{/* Main JS */}}
+  <script src="/js/main.js" defer></script>
+
+</body>
+</html>

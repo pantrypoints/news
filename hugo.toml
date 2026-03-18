@@ -1,0 +1,90 @@
+baseURL = "https://thepointnews.com/"
+title = "The Point News"
+defaultContentLanguage = "en"
+defaultContentLanguageInSubdir = true
+enableRobotsTXT = true
+summaryLength = 40
+
+[outputs]
+  home    = ["HTML", "JSON"]
+  section = ["HTML"]
+  page    = ["HTML"]
+
+[outputFormats]
+  [outputFormats.JSON]
+    mediaType    = "application/json"
+    baseName     = "index"
+    isPlainText  = true
+    notAlternative = true
+
+[languages]
+  [languages.en]
+    languageName   = "English"
+    languageCode   = "en-PH"
+    weight         = 1
+    contentDir     = "content/en"
+    [languages.en.params]
+      rtl = false
+
+  [languages.tl]
+    languageName   = "Filipino"
+    languageCode   = "tl"
+    weight         = 2
+    contentDir     = "content/tl"
+    [languages.tl.params]
+      rtl = false
+
+  [languages.cb]
+    languageName   = "Cebuano"
+    languageCode   = "ceb"
+    weight         = 3
+    contentDir     = "content/cb"
+    [languages.cb.params]
+      rtl = false
+
+[params]
+  description     = "Breaking news, in-depth analysis, and the latest updates from the Philippines and the world."
+  tagline         = "Get to the point."
+  logo            = "/images/logo.svg"
+  twitterHandle   = "@thepointnews"
+  facebookPage    = "thepointnews"
+  mainSections    = ["world", "politics", "sports", "technology", "entertainment"]
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.highlight]
+    style = "dracula"
+
+[menu]
+  [[menu.main]]
+    name       = "World"
+    pageRef    = "/world"
+    weight     = 1
+    [menu.main.params]
+      color = "#DC2626"
+  [[menu.main]]
+    name       = "Politics"
+    pageRef    = "/politics"
+    weight     = 2
+    [menu.main.params]
+      color = "#C44D18"
+  [[menu.main]]
+    name       = "Sports"
+    pageRef    = "/sports"
+    weight     = 3
+    [menu.main.params]
+      color = "#16A34A"
+  [[menu.main]]
+    name       = "Technology"
+    pageRef    = "/technology"
+    weight     = 4
+    [menu.main.params]
+      color = "#0891B2"
+  [[menu.main]]
+    name       = "Entertainment"
+    pageRef    = "/entertainment"
+    weight     = 5
+    [menu.main.params]
+      color = "#7C3AED"
