@@ -1,5 +1,5 @@
 baseURL = "https://news.pantrypoints.com/"
-title = "The Point News"
+title = "Pointer News"
 defaultContentLanguage = "en"
 defaultContentLanguageInSubdir = true
 enableRobotsTXT = true
@@ -43,8 +43,8 @@ summaryLength = 40
       rtl = false
 
 [params]
-  description     = "Breaking news, in-depth analysis"
-  tagline         = "Get to the point."
+  description     = "News and events with Superphysics views"
+  tagline         = "We get to the point."
   logo            = "/point.png"
   twitterHandle   = "@thepointnews"
   facebookPage    = "thepointnews"
@@ -88,3 +88,4 @@ summaryLength = 40
     weight     = 5
     [menu.main.params]
       color = "#7C3AED"
+

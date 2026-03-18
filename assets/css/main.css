@@ -53,8 +53,9 @@ html {
 }
 
 body {
-  @apply bg-gray-50 text-gray-900 dark:bg-dark-800 dark:text-gray-100 transition-colors duration-300;
+  @apply bg-gray-50 text-black dark:bg-dark-800 dark:text-gray-100 transition-colors duration-300;
 }
+
 
 /* ── Scrollbar ───────────────────────────────────────────────────── */
 ::-webkit-scrollbar { width: 6px; }

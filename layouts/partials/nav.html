@@ -1,38 +1,115 @@
-{{/* ── Navigation ─────────────────────────────────────────────── */}}
+{{/* ── Navigation with Submenus ─────────────────────────────────── */}}
 {{ $currentLang := .Lang }}
 {{ $currentSection := .Section }}
+{{ $currentPage := . }}
 
-<nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 bg-dark-800/95 backdrop-blur-md border-b border-white/8 transition-all duration-300 py-2">
+<nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-2 bg-dark-800/95 backdrop-blur-md border-b border-white/8">
   <div class="max-w-7xl mx-auto px-4 sm:px-6">
     <div class="flex items-center justify-between h-14">
 
       {{/* ── Logo ── */}}
       <a href="{{ (site.GetPage "/").RelPermalink | default "/" }}" class="flex items-center gap-2 shrink-0 group">
-        <div class="w-8 h-8 rounded-lg bg-brand flex items-center justify-center text-white font-bold text-sm group-hover:bg-brand-400 transition-colors">
-          TP
-        </div>
+        <img src="/point.png" class="w-8">
         <div class="leading-tight">
           <span class="block text-base font-bold text-white tracking-tight">The Point</span>
           <span class="block text-[10px] text-accent uppercase tracking-widest -mt-0.5">News</span>
         </div>
       </a>
 
-      {{/* ── Desktop category links ── */}}
+      {{/* ── Desktop category links with submenus ── */}}
       <ul class="hidden lg:flex items-center gap-1 mx-4">
-        {{ range .Site.Menus.main }}
-        {{ $active := eq $currentSection (lower .Name) }}
-        <li>
-          <a href="{{ relLangURL (lower .Name) }}"
-             class="nav-link px-3 py-1 rounded {{ if $active }}text-accent{{ end }}">
-            {{ .Name }}
+        {{/* World Menu */}}
+        <li class="nav-item relative group">
+          <a href="{{ relLangURL "world" }}" 
+             class="nav-link px-3 py-1 rounded flex items-center gap-1 text-gray-200 hover:text-accent {{ if eq $currentSection "world" }}text-accent{{ end }}">
+            World
+            <svg class="w-3 h-3 transition-transform duration-200 group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path d="m6 9 6 6 6-6"/>
+            </svg>
           </a>
+          {{/* Submenu with extended hover area */}}
+          <div class="absolute left-0 top-full pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+            <div class="bg-dark-700 border border-white/10 rounded-xl overflow-hidden shadow-xl shadow-black/40 py-2 min-w-48">
+              <a href="{{ relLangURL "asia" }}" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-dark-600 transition-colors">Asia</a>
+              <a href="{{ relLangURL "africa" }}" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-dark-600 transition-colors">Africa</a>
+              <a href="{{ relLangURL "middle-east" }}" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-dark-600 transition-colors">Middle East</a>
+              <a href="{{ relLangURL "europe" }}" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-dark-600 transition-colors">Europe</a>
+              <a href="{{ relLangURL "americas" }}" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-dark-600 transition-colors">Americas</a>
+              <a href="{{ relLangURL "oceania" }}" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-dark-600 transition-colors">Oceania</a>
+            </div>
+          </div>
         </li>
-        {{ end }}
+
+        {{/* Economy Menu */}}
+        <li class="nav-item relative group">
+          <a href="{{ relLangURL "economy" }}" 
+             class="nav-link px-3 py-1 rounded flex items-center gap-1 text-gray-200 hover:text-accent {{ if eq $currentSection "economy" }}text-accent{{ end }}">
+            Economy
+            <svg class="w-3 h-3 transition-transform duration-200 group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path d="m6 9 6 6 6-6"/>
+            </svg>
+          </a>
+          {{/* Submenu with extended hover area */}}
+          <div class="absolute left-0 top-full pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+            <div class="bg-dark-700 border border-white/10 rounded-xl overflow-hidden shadow-xl shadow-black/40 py-2 min-w-48">
+              <a href="{{ relLangURL "agri" }}" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-dark-600 transition-colors">Agri</a>
+              <a href="{{ relLangURL "business" }}" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-dark-600 transition-colors">Business</a>
+              <a href="{{ relLangURL "jobs" }}" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-dark-600 transition-colors">Jobs</a>
+              <a href="{{ relLangURL "retail" }}" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-dark-600 transition-colors">Retail</a>
+              <a href="{{ relLangURL "tourism" }}" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-dark-600 transition-colors">Tourism</a>
+              <a href="{{ relLangURL "startups" }}" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-dark-600 transition-colors">Startups</a>
+              <a href="{{ relLangURL "promos" }}" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-dark-600 transition-colors">Promos</a>
+            </div>
+          </div>
+        </li>
+
+        {{/* Life Menu */}}
+        <li class="nav-item relative group">
+          <a href="{{ relLangURL "life" }}" 
+             class="nav-link px-3 py-1 rounded flex items-center gap-1 text-gray-200 hover:text-accent {{ if eq $currentSection "life" }}text-accent{{ end }}">
+            Life
+            <svg class="w-3 h-3 transition-transform duration-200 group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path d="m6 9 6 6 6-6"/>
+            </svg>
+          </a>
+          {{/* Submenu with extended hover area */}}
+          <div class="absolute left-0 top-full pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+            <div class="bg-dark-700 border border-white/10 rounded-xl overflow-hidden shadow-xl shadow-black/40 py-2 min-w-48">
+              <a href="{{ relLangURL "health" }}" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-dark-600 transition-colors">Health</a>
+              <a href="{{ relLangURL "environment" }}" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-dark-600 transition-colors">Environment</a>
+              <a href="{{ relLangURL "food" }}" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-dark-600 transition-colors">Food</a>
+              <a href="{{ relLangURL "causes" }}" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-dark-600 transition-colors">Causes</a>
+              <a href="{{ relLangURL "culture" }}" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-dark-600 transition-colors">Culture</a>
+              <a href="{{ relLangURL "education" }}" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-dark-600 transition-colors">Education</a>
+              <a href="{{ relLangURL "entertainment" }}" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-dark-600 transition-colors">Entertainment</a>
+            </div>
+          </div>
+        </li>
+
+        {{/* Tech Menu */}}
+        <li class="nav-item relative group">
+          <a href="{{ relLangURL "tech" }}" 
+             class="nav-link px-3 py-1 rounded flex items-center gap-1 text-gray-200 hover:text-accent {{ if eq $currentSection "tech" }}text-accent{{ end }}">
+            Tech
+            <svg class="w-3 h-3 transition-transform duration-200 group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path d="m6 9 6 6 6-6"/>
+            </svg>
+          </a>
+          {{/* Submenu with extended hover area */}}
+          <div class="absolute left-0 top-full pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+            <div class="bg-dark-700 border border-white/10 rounded-xl overflow-hidden shadow-xl shadow-black/40 py-2 min-w-48">
+              <a href="{{ relLangURL "science" }}" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-dark-600 transition-colors">Science</a>
+              <a href="{{ relLangURL "tech" }}" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-dark-600 transition-colors">Tech</a>
+              <a href="{{ relLangURL "cyber" }}" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-dark-600 transition-colors">Cyber</a>
+              <a href="{{ relLangURL "crypto" }}" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-dark-600 transition-colors">Crypto</a>
+              <a href="{{ relLangURL "competitions" }}" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-dark-600 transition-colors">Competitions</a>
+            </div>
+          </div>
+        </li>
       </ul>
 
-      {{/* ── Right controls ── */}}
+      {{/* ── Right controls with dark mode support ── */}}
       <div class="flex items-center gap-2">
-
         {{/* Search button */}}
         <button id="search-toggle"
                 class="flex items-center gap-2 bg-dark-600 hover:bg-dark-500 text-gray-300 hover:text-white rounded-full px-3 py-1.5 text-xs transition-all duration-200 group"
@@ -65,16 +142,16 @@
           </div>
         </div>
 
-        {{/* Dark mode toggle */}}
+        {{/* Dark mode toggle - FIXED VERSION */}}
         <button id="theme-toggle"
                 class="w-8 h-8 flex items-center justify-center rounded-full bg-dark-600 hover:bg-dark-500 text-gray-300 hover:text-accent transition-all duration-200"
                 title="Toggle dark mode">
-          {{/* Sun */}}
-          <svg class="icon-sun w-4 h-4 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          {{/* Sun - shown when NOT in dark mode */}}
+          <svg class="w-4 h-4 hidden" id="theme-sun" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
           </svg>
-          {{/* Moon */}}
-          <svg class="icon-moon w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          {{/* Moon - shown when IN dark mode */}}
+          <svg class="w-4 h-4 block" id="theme-moon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
           </svg>
         </button>
@@ -90,7 +167,7 @@
   </div>
 </nav>
 
-{{/* ── Mobile Menu Drawer ────────────────────────────────────────── */}}
+{{/* ── Mobile Menu Drawer with Submenus ─────────────────────────── */}}
 <div id="mobile-overlay" class="fixed inset-0 bg-black/60 z-[60] lg:hidden hidden"></div>
 <aside id="mobile-menu" class="fixed top-0 left-0 h-full w-72 bg-dark-800 z-[70] lg:hidden hidden flex-col">
   <div class="flex items-center justify-between p-4 border-b border-white/10">
@@ -101,21 +178,96 @@
       </svg>
     </button>
   </div>
+  
   <nav class="flex-1 overflow-y-auto p-4">
-    <ul class="space-y-1">
-      {{ range .Site.Menus.main }}
+    <ul class="space-y-2">
+      {{/* World Menu - Mobile */}}
       <li>
-        <a href="{{ relLangURL (lower .Name) }}"
-           class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-200 hover:text-white hover:bg-dark-600 transition-colors text-sm font-medium {{ if eq $currentSection (lower .Name) }}bg-dark-600 text-accent{{ end }}">
-          {{ .Name }}
-        </a>
+        <div class="flex items-center justify-between px-4 py-3 rounded-xl text-gray-200">
+          <a href="{{ relLangURL "world" }}" class="flex-1 {{ if eq $currentSection "world" }}text-accent{{ end }}">World</a>
+          <button class="mobile-submenu-toggle p-1 hover:text-accent transition-colors" data-target="world-submenu">
+            <svg class="w-4 h-4 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path d="m9 18 6-6-6-6"/>
+            </svg>
+          </button>
+        </div>
+        <ul id="world-submenu" class="mobile-submenu hidden pl-4 mt-1 space-y-1 border-l-2 border-dark-600">
+          <li><a href="{{ relLangURL "asia" }}" class="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-dark-600 rounded-lg">Asia</a></li>
+          <li><a href="{{ relLangURL "africa" }}" class="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-dark-600 rounded-lg">Africa</a></li>
+          <li><a href="{{ relLangURL "middle-east" }}" class="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-dark-600 rounded-lg">Middle East</a></li>
+          <li><a href="{{ relLangURL "europe" }}" class="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-dark-600 rounded-lg">Europe</a></li>
+          <li><a href="{{ relLangURL "americas" }}" class="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-dark-600 rounded-lg">Americas</a></li>
+          <li><a href="{{ relLangURL "oceania" }}" class="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-dark-600 rounded-lg">Oceania</a></li>
+        </ul>
       </li>
-      {{ end }}
+
+      {{/* Economy Menu - Mobile */}}
+      <li>
+        <div class="flex items-center justify-between px-4 py-3 rounded-xl text-gray-200">
+          <a href="{{ relLangURL "economy" }}" class="flex-1 {{ if eq $currentSection "economy" }}text-accent{{ end }}">Economy</a>
+          <button class="mobile-submenu-toggle p-1 hover:text-accent transition-colors" data-target="economy-submenu">
+            <svg class="w-4 h-4 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path d="m9 18 6-6-6-6"/>
+            </svg>
+          </button>
+        </div>
+        <ul id="economy-submenu" class="mobile-submenu hidden pl-4 mt-1 space-y-1 border-l-2 border-dark-600">
+          <li><a href="{{ relLangURL "agri" }}" class="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-dark-600 rounded-lg">Agri</a></li>
+          <li><a href="{{ relLangURL "business" }}" class="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-dark-600 rounded-lg">Business</a></li>
+          <li><a href="{{ relLangURL "jobs" }}" class="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-dark-600 rounded-lg">Jobs</a></li>
+          <li><a href="{{ relLangURL "retail" }}" class="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-dark-600 rounded-lg">Retail</a></li>
+          <li><a href="{{ relLangURL "tourism" }}" class="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-dark-600 rounded-lg">Tourism</a></li>
+          <li><a href="{{ relLangURL "startups" }}" class="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-dark-600 rounded-lg">Startups</a></li>
+          <li><a href="{{ relLangURL "promos" }}" class="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-dark-600 rounded-lg">Promos</a></li>
+        </ul>
+      </li>
+
+      {{/* Life Menu - Mobile */}}
+      <li>
+        <div class="flex items-center justify-between px-4 py-3 rounded-xl text-gray-200">
+          <a href="{{ relLangURL "life" }}" class="flex-1 {{ if eq $currentSection "life" }}text-accent{{ end }}">Life</a>
+          <button class="mobile-submenu-toggle p-1 hover:text-accent transition-colors" data-target="life-submenu">
+            <svg class="w-4 h-4 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path d="m9 18 6-6-6-6"/>
+            </svg>
+          </button>
+        </div>
+        <ul id="life-submenu" class="mobile-submenu hidden pl-4 mt-1 space-y-1 border-l-2 border-dark-600">
+          <li><a href="{{ relLangURL "health" }}" class="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-dark-600 rounded-lg">Health</a></li>
+          <li><a href="{{ relLangURL "environment" }}" class="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-dark-600 rounded-lg">Environment</a></li>
+          <li><a href="{{ relLangURL "food" }}" class="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-dark-600 rounded-lg">Food</a></li>
+          <li><a href="{{ relLangURL "causes" }}" class="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-dark-600 rounded-lg">Causes</a></li>
+          <li><a href="{{ relLangURL "culture" }}" class="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-dark-600 rounded-lg">Culture</a></li>
+          <li><a href="{{ relLangURL "education" }}" class="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-dark-600 rounded-lg">Education</a></li>
+          <li><a href="{{ relLangURL "entertainment" }}" class="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-dark-600 rounded-lg">Entertainment</a></li>
+        </ul>
+      </li>
+
+      {{/* Tech Menu - Mobile */}}
+      <li>
+        <div class="flex items-center justify-between px-4 py-3 rounded-xl text-gray-200">
+          <a href="{{ relLangURL "tech" }}" class="flex-1 {{ if eq $currentSection "tech" }}text-accent{{ end }}">Tech</a>
+          <button class="mobile-submenu-toggle p-1 hover:text-accent transition-colors" data-target="tech-submenu">
+            <svg class="w-4 h-4 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path d="m9 18 6-6-6-6"/>
+            </svg>
+          </button>
+        </div>
+        <ul id="tech-submenu" class="mobile-submenu hidden pl-4 mt-1 space-y-1 border-l-2 border-dark-600">
+          <li><a href="{{ relLangURL "science" }}" class="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-dark-600 rounded-lg">Science</a></li>
+          <li><a href="{{ relLangURL "tech" }}" class="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-dark-600 rounded-lg">Tech</a></li>
+          <li><a href="{{ relLangURL "cyber" }}" class="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-dark-600 rounded-lg">Cyber</a></li>
+          <li><a href="{{ relLangURL "crypto" }}" class="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-dark-600 rounded-lg">Crypto</a></li>
+          <li><a href="{{ relLangURL "competitions" }}" class="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-dark-600 rounded-lg">Competitions</a></li>
+        </ul>
+      </li>
     </ul>
+
     <div class="mt-6 pt-6 border-t border-white/10">
-      <p class="text-xs text-gray-500 uppercase tracking-widest mb-3 px-4">Language</p>
+      <p class="text-xs text-gray-400 uppercase tracking-widest mb-3 px-4">Language</p>
       {{ range .Site.Languages }}
-      <a href="#" class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm {{ if eq .Lang $currentLang }}text-accent font-semibold{{ else }}text-gray-400 hover:text-white hover:bg-dark-600{{ end }} transition-colors">
+      <a href="{{ relLangURL "" | replaceRE (printf "^/%s/" $currentLang) (printf "/%s/" .Lang) }}" 
+         class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm {{ if eq .Lang $currentLang }}text-accent font-semibold{{ else }}text-gray-400 hover:text-white hover:bg-dark-600{{ end }} transition-colors">
         <span class="uppercase text-[10px] font-bold w-6">{{ .Lang }}</span>
         {{ .LanguageName }}
       </a>
@@ -127,9 +279,9 @@
 {{/* ── Search Modal ──────────────────────────────────────────────── */}}
 <div id="search-modal" class="fixed inset-0 z-[80] hidden flex items-start justify-center pt-20 px-4">
   <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" id="search-backdrop"></div>
-  <div class="relative w-full max-w-2xl bg-white dark:bg-dark-700 rounded-2xl shadow-2xl shadow-black/50 overflow-hidden">
+  <div class="relative w-full max-w-2xl bg-dark-700 rounded-2xl shadow-2xl shadow-black/50 overflow-hidden">
     {{/* Search input */}}
-    <div class="flex items-center gap-3 px-4 py-4 border-b border-gray-100 dark:border-white/10">
+    <div class="flex items-center gap-3 px-4 py-4 border-b border-white/10">
       <svg class="w-5 h-5 text-gray-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
         <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
       </svg>
@@ -137,8 +289,8 @@
              type="text"
              autocomplete="off"
              placeholder="{{ i18n "search_placeholder" | default "Search articles, authors…" }}"
-             class="flex-1 bg-transparent text-gray-900 dark:text-white placeholder-gray-400 text-base outline-none">
-      <button id="search-close" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors">
+             class="flex-1 bg-transparent text-white placeholder-gray-400 text-base outline-none">
+      <button id="search-close" class="text-gray-400 hover:text-gray-200 transition-colors">
         <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path d="M18 6 6 18M6 6l12 12"/>
         </svg>
@@ -148,9 +300,9 @@
     <div id="search-results" class="max-h-96 overflow-y-auto p-2">
       <p class="text-sm text-gray-400 p-4 text-center">Type to search…</p>
     </div>
-    <div class="px-4 py-2.5 bg-gray-50 dark:bg-dark-800 border-t border-gray-100 dark:border-white/10 flex items-center justify-between text-xs text-gray-400">
+    <div class="px-4 py-2.5 bg-dark-800 border-t border-white/10 flex items-center justify-between text-xs text-gray-400">
       <span>Search by title, author or description</span>
-      <kbd class="bg-white dark:bg-dark-700 border border-gray-200 dark:border-white/15 rounded px-1.5 py-0.5">Esc</kbd>
+      <kbd class="bg-dark-700 border border-white/15 rounded px-1.5 py-0.5">Esc</kbd>
     </div>
   </div>
 </div>
@@ -159,3 +311,55 @@
 <div id="lightbox" class="fixed inset-0 z-[90] hidden flex items-center justify-center bg-black/90 cursor-zoom-out p-4">
   <img id="lightbox-img" src="" alt="" class="max-w-full max-h-full object-contain rounded-lg shadow-2xl">
 </div>
+
+<script>
+  // Theme toggle functionality
+  document.addEventListener('DOMContentLoaded', function() {
+    const themeToggle = document.getElementById('theme-toggle');
+    const sunIcon = document.getElementById('theme-sun');
+    const moonIcon = document.getElementById('theme-moon');
+    
+    // Check current theme
+    function updateThemeIcons() {
+      const isDark = document.documentElement.classList.contains('dark');
+      if (sunIcon && moonIcon) {
+        if (isDark) {
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'block';
+        } else {
+          sunIcon.style.display = 'block';
+          moonIcon.style.display = 'none';
+        }
+      }
+    }
+    
+    // Initial update
+    updateThemeIcons();
+    
+    // Toggle theme
+    if (themeToggle) {
+      themeToggle.addEventListener('click', function() {
+        if (document.documentElement.classList.contains('dark')) {
+          document.documentElement.classList.remove('dark');
+          localStorage.setItem('theme', 'light');
+        } else {
+          document.documentElement.classList.add('dark');
+          localStorage.setItem('theme', 'dark');
+        }
+        updateThemeIcons();
+      });
+    }
+    
+    // Mobile submenu toggle
+    document.querySelectorAll('.mobile-submenu-toggle').forEach(button => {
+      button.addEventListener('click', function() {
+        const targetId = this.dataset.target;
+        const submenu = document.getElementById(targetId);
+        const arrow = this.querySelector('svg');
+        
+        submenu.classList.toggle('hidden');
+        arrow.classList.toggle('rotate-90');
+      });
+    });
+  });
+</script>

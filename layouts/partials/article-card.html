@@ -9,8 +9,8 @@
 
   {{/* Thumbnail */}}
   <div class="img-zoom-wrap shrink-0{{ if eq $size "large" }} lg:w-1/2 h-56 lg:h-auto{{ else if eq $size "small" }} h-40{{ else }} h-48{{ end }}">
-    {{ if $p.Params.hero_image }}
-    <img src="{{ $p.Params.hero_image }}" alt="{{ $p.Title }}" class="w-full h-full object-cover">
+    {{ if $p.Params.image }}
+    <img src="{{ $p.Params.image }}" alt="{{ $p.Title }}" class="w-full h-full object-cover">
     {{ else }}
     <div class="w-full h-full hero-grad-{{ $p.Section }} flex items-center justify-center">
       {{ if $p.Params.hero_video }}

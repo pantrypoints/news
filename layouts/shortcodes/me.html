@@ -1,0 +1,11 @@
+{{ $date := .Get "date" | default "" }}
+{{ $d := .Get "d" | default "" }}
+
+<section class="message is-success mt-6" data-sal="slide-right">
+  <div class="message-header">
+    Update: {{ $date }} {{ $d }}
+  </div>
+  <div class="message-body">
+    {{ .Inner | markdownify }}
+  </div>
+</section>
