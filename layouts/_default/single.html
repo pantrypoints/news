@@ -7,7 +7,6 @@
 
     {{/* Main content */}}
     <main class="flex-1 min-w-0">
-
       <div class="flex items-center justify-between mb-8 pb-6 border-b border-gray-100 dark:border-white/8">
         <div class="flex items-center gap-2 text-xs text-gray-500">
           <a href="{{ with .Site.GetPage .Section }}{{ .RelPermalink }}{{ end }}"
@@ -51,7 +50,7 @@
       {{ with .Params.author }}
       <div class="mt-10 p-6 bg-gray-50 dark:bg-dark-700 rounded-2xl border border-gray-100 dark:border-white/8">
         <div class="flex items-start gap-4">
-          <div class="w-14 h-14 rounded-full bg-gradient-to-br from-brand to-brand-400 flex items-center justify-center text-white text-xl font-bold shrink-0">{{ substr . 0 1 }} asdf</div>
+          <div class="w-14 h-14 rounded-full bg-gradient-to-br from-brand to-brand-400 flex items-center justify-center text-white text-xl font-bold shrink-0">{{ substr . 0 1 }}</div>
           <div>
             <p class="font-bold text-gray-900 dark:text-white">{{ . }}</p>
             <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Reporter</p>
@@ -64,6 +63,9 @@
       {{ end }}
 
     </main>
+
+
+    
 
     {{/* Sidebar */}}
     <aside class="w-full lg:w-80 shrink-0">

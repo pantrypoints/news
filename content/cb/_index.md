@@ -1,4 +1,5 @@
 ---
 title: "The Point News"
-description: "Bag-ong mga balita, malalim nga pagtuki, ug pinakabagong mga update gikan sa Pilipinas ug sa tibuok kalibutan."
+description: "Breaking news, in-depth analysis, and the latest updates from the Philippines and the world."
+hero_video: ""
 ---

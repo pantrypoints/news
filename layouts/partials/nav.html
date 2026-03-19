@@ -55,10 +55,10 @@
               <a href="{{ relLangURL "agri" }}" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-dark-600 transition-colors">Agri</a>
               <a href="{{ relLangURL "business" }}" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-dark-600 transition-colors">Business</a>
               <a href="{{ relLangURL "jobs" }}" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-dark-600 transition-colors">Jobs</a>
-              <a href="{{ relLangURL "retail" }}" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-dark-600 transition-colors">Retail</a>
-              <a href="{{ relLangURL "tourism" }}" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-dark-600 transition-colors">Tourism</a>
-              <a href="{{ relLangURL "startups" }}" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-dark-600 transition-colors">Startups</a>
               <a href="{{ relLangURL "promos" }}" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-dark-600 transition-colors">Promos</a>
+              <a href="{{ relLangURL "retail" }}" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-dark-600 transition-colors">Retail</a>
+              <a href="{{ relLangURL "startups" }}" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-dark-600 transition-colors">Startups</a>
+              <a href="{{ relLangURL "tourism" }}" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-dark-600 transition-colors">Tourism</a>  
             </div>
           </div>
         </li>
@@ -75,13 +75,13 @@
           {{/* Submenu with extended hover area */}}
           <div class="absolute left-0 top-full pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
             <div class="bg-dark-700 border border-white/10 rounded-xl overflow-hidden shadow-xl shadow-black/40 py-2 min-w-48">
-              <a href="{{ relLangURL "health" }}" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-dark-600 transition-colors">Health</a>
-              <a href="{{ relLangURL "environment" }}" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-dark-600 transition-colors">Environment</a>
-              <a href="{{ relLangURL "food" }}" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-dark-600 transition-colors">Food</a>
               <a href="{{ relLangURL "causes" }}" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-dark-600 transition-colors">Causes</a>
               <a href="{{ relLangURL "culture" }}" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-dark-600 transition-colors">Culture</a>
               <a href="{{ relLangURL "education" }}" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-dark-600 transition-colors">Education</a>
               <a href="{{ relLangURL "entertainment" }}" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-dark-600 transition-colors">Entertainment</a>
+              <a href="{{ relLangURL "environment" }}" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-dark-600 transition-colors">Environment</a>
+              <a href="{{ relLangURL "food" }}" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-dark-600 transition-colors">Food</a>
+              <a href="{{ relLangURL "health" }}" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-dark-600 transition-colors">Health</a>
             </div>
           </div>
         </li>
@@ -98,11 +98,11 @@
           {{/* Submenu with extended hover area */}}
           <div class="absolute left-0 top-full pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
             <div class="bg-dark-700 border border-white/10 rounded-xl overflow-hidden shadow-xl shadow-black/40 py-2 min-w-48">
-              <a href="{{ relLangURL "science" }}" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-dark-600 transition-colors">Science</a>
-              <a href="{{ relLangURL "tech" }}" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-dark-600 transition-colors">Tech</a>
               <a href="{{ relLangURL "cyber" }}" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-dark-600 transition-colors">Cyber</a>
               <a href="{{ relLangURL "crypto" }}" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-dark-600 transition-colors">Crypto</a>
               <a href="{{ relLangURL "competitions" }}" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-dark-600 transition-colors">Competitions</a>
+              <a href="{{ relLangURL "science" }}" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-dark-600 transition-colors">Science</a>
+              <a href="{{ relLangURL "tech" }}" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-dark-600 transition-colors">Tech</a>
             </div>
           </div>
         </li>
@@ -311,55 +311,3 @@
 <div id="lightbox" class="fixed inset-0 z-[90] hidden flex items-center justify-center bg-black/90 cursor-zoom-out p-4">
   <img id="lightbox-img" src="" alt="" class="max-w-full max-h-full object-contain rounded-lg shadow-2xl">
 </div>
-
-<script>
-  // Theme toggle functionality
-  document.addEventListener('DOMContentLoaded', function() {
-    const themeToggle = document.getElementById('theme-toggle');
-    const sunIcon = document.getElementById('theme-sun');
-    const moonIcon = document.getElementById('theme-moon');
-    
-    // Check current theme
-    function updateThemeIcons() {
-      const isDark = document.documentElement.classList.contains('dark');
-      if (sunIcon && moonIcon) {
-        if (isDark) {
-          sunIcon.style.display = 'none';
-          moonIcon.style.display = 'block';
-        } else {
-          sunIcon.style.display = 'block';
-          moonIcon.style.display = 'none';
-        }
-      }
-    }
-    
-    // Initial update
-    updateThemeIcons();
-    
-    // Toggle theme
-    if (themeToggle) {
-      themeToggle.addEventListener('click', function() {
-        if (document.documentElement.classList.contains('dark')) {
-          document.documentElement.classList.remove('dark');
-          localStorage.setItem('theme', 'light');
-        } else {
-          document.documentElement.classList.add('dark');
-          localStorage.setItem('theme', 'dark');
-        }
-        updateThemeIcons();
-      });
-    }
-    
-    // Mobile submenu toggle
-    document.querySelectorAll('.mobile-submenu-toggle').forEach(button => {
-      button.addEventListener('click', function() {
-        const targetId = this.dataset.target;
-        const submenu = document.getElementById(targetId);
-        const arrow = this.querySelector('svg');
-        
-        submenu.classList.toggle('hidden');
-        arrow.classList.toggle('rotate-90');
-      });
-    });
-  });
-</script>

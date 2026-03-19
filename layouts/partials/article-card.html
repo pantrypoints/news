@@ -10,13 +10,13 @@
   {{/* Thumbnail */}}
   <div class="img-zoom-wrap shrink-0{{ if eq $size "large" }} lg:w-1/2 h-56 lg:h-auto{{ else if eq $size "small" }} h-40{{ else }} h-48{{ end }}">
     {{ if $p.Params.image }}
-    <img src="{{ $p.Params.image }}" alt="{{ $p.Title }}" class="w-full h-full object-cover">
+      <img src="{{ $p.Params.image }}" alt="{{ $p.Title }}" class="w-full h-full object-cover">
     {{ else }}
     <div class="w-full h-full hero-grad-{{ $p.Section }} flex items-center justify-center">
       {{ if $p.Params.hero_video }}
-      <svg class="w-12 h-12 text-white/50" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor"/></svg>
+        <svg class="w-12 h-12 text-white/50" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor"/></svg>
       {{ else }}
-      <span class="text-white/20 font-bold text-5xl uppercase">{{ substr $p.Section 0 1 }}</span>
+        <span class="text-white/20 font-bold text-5xl uppercase">{{ substr $p.Section 0 1 }}</span>
       {{ end }}
     </div>
     {{ end }}

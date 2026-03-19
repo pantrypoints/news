@@ -1,4 +1,6 @@
 ---
-title: "Pulitika"
-description: "Pamahalaan ng Pilipinas, batas, eleksyon, at pagsusuri ng pulitika."
+title: "Politics"
+description: "Philippine government, legislation, elections, and political analysis from Manila and the regions."
+hero_video: ""
+hero_image: ""
 ---

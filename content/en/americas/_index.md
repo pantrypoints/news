@@ -1,6 +1,6 @@
 ---
-title: Food
-image: "/covers/food.png"
+title: Americas
+# image: "/covers/food.png"
 date: 2022-01-31
-description: Food News
+description: Americas News
 ---
